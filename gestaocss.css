@@ -1,0 +1,388 @@
+/* Arquivo: gestaocss.css */
+
+/* Importação da Fonte e Variáveis (Mantendo a consistência) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    --primary-color: #5B48CC; /* Roxo */
+    --secondary-color: #8C7DEB; /* Roxo Claro */
+    --text-color: #333;
+    --light-bg: #F0F2F5; /* Fundo do dashboard */
+    --white: #FFFFFF;
+    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+    
+    /* Variáveis para Kanban */
+    --kanban-bg: #EAECEF; /* Fundo da coluna */
+    --color-todo: #FF5722; /* Laranja (Urgente) */
+    --color-inprogress: #FFC107; /* Amarelo (Atenção) */
+    --color-done: #4CAF50; /* Verde (Concluído) */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+    background-color: var(--light-bg);
+}
+
+/* --- Layout Principal (Grid) --- */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 250px 1fr; /* 250px para sidebar, o resto para conteúdo */
+    min-height: 100vh;
+}
+
+/* --- Sidebar (Barra Lateral) --- */
+.sidebar {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 30px 0;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar .logo {
+    font-size: 1.8em;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-item {
+    padding: 15px 30px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+    border-left: 5px solid transparent;
+}
+
+.nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+}
+
+.nav-item.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    border-left-color: var(--secondary-color);
+}
+
+.sidebar hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 20px 30px;
+}
+
+.nav-item.logout {
+    margin-top: 10px;
+    color: #FFB3B3; 
+}
+
+/* --- Conteúdo Principal --- */
+.main-content {
+    padding: 30px;
+}
+
+.main-header-dash {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.main-header-dash h1 {
+    font-size: 2em;
+    font-weight: 600;
+    margin: 0;
+}
+
+.header-actions .btn-add {
+    padding: 8px 15px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.header-actions .btn-add:hover {
+    background-color: var(--primary-color);
+}
+
+/* --- Overview Cards (Mantenha se desejar a contagem separada) --- */
+.overview-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.card {
+    background-color: var(--white);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+    text-align: left;
+}
+
+.card h3 {
+    font-size: 1.2em;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.tasks-card .count {
+    font-size: 3em;
+    font-weight: 700;
+    color: var(--color-todo); /* Usa a cor de "A Fazer" para a contagem geral */
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* ---------------------------------- */
+/* --- ESTILOS KANBAN (NOVO) --- */
+/* ---------------------------------- */
+
+.study-planner-section h2 {
+    font-size: 1.8em;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.kanban-board {
+    display: flex;
+    gap: 20px; /* Espaçamento entre as colunas */
+    padding-bottom: 10px;
+    overflow-x: auto; /* Permite rolagem lateral */
+    align-items: flex-start; /* Alinha o topo das colunas */
+}
+
+.kanban-column {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    background-color: var(--kanban-bg); /* Fundo claro para a coluna */
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: var(--shadow-light);
+    display: flex;
+    flex-direction: column;
+}
+
+.column-header {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--primary-color);
+}
+
+.column-header .count {
+    background-color: var(--primary-color); 
+    color: var(--white);
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    font-weight: 700;
+}
+
+.task-list {
+    min-height: 100px; /* Importante para a área de drop */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 5px;
+}
+
+.kanban-card {
+    background-color: var(--white);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid; /* A cor da borda será definida pelo JS/Tipo */
+    cursor: grab;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-size: 0.95em;
+}
+/* Dentro do gestaocss.css */
+
+/* 1. Esconde o botão de exclusão por padrão */
+.kanban-card .btn-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #cc0000; /* Vermelho */
+    opacity: 0; /* Torna o botão invisível */
+    transition: opacity 0.2s, transform 0.2s;
+    position: absolute; /* Permite posicionamento fora do fluxo normal do texto */
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+    line-height: 1; /* Alinha o ícone corretamente */
+}
+
+/* 2. Mostra o botão quando o mouse está sobre o cartão */
+.kanban-card:hover .btn-delete {
+    opacity: 1; /* Torna o botão visível */
+    transform: scale(1.1);
+}
+
+/* 3. Garante que o cartão seja o contexto para o posicionamento do botão */
+.kanban-card {
+    /* ... outros estilos ... */
+    position: relative; /* CRUCIAL para que 'position: absolute' funcione no .btn-delete */
+}
+
+.kanban-card:active {
+    cursor: grabbing;
+    transform: translateY(-2px); 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.card-meta {
+    font-size: 0.8em;
+    color: #7f8c8d;
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Cores de Borda e Cabeçalho por Status */
+.kanban-column[data-status="todo"] .column-header { color: var(--color-todo); border-bottom-color: var(--color-todo); }
+.kanban-column[data-status="in-progress"] .column-header { color: var(--color-inprogress); border-bottom-color: var(--color-inprogress); }
+.kanban-column[data-status="done"] .column-header { color: var(--color-done); border-bottom-color: var(--color-done); }
+
+.kanban-column[data-status="todo"] .column-header .count { background-color: var(--color-todo); }
+.kanban-column[data-status="in-progress"] .column-header .count { background-color: var(--color-inprogress); }
+.kanban-column[data-status="done"] .column-header .count { background-color: var(--color-done); }
+
+
+/* Cores da borda do card por Tipo (para diferenciar Tarefa/Estudo/Projeto) */
+.card-tipo-tarefa { border-left-color: var(--color-todo); } 
+.card-tipo-estudo { border-left-color: var(--primary-color); } 
+.card-tipo-projeto { border-left-color: var(--secondary-color); } 
+
+.dragging {
+    opacity: 0.5;
+    box-shadow: none;
+}
+
+.empty-list-msg {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 20px;
+}
+
+/* --- LIMPEZA DE ESTILOS ANTIGOS/INCOMPATÍVEIS --- */
+/* (Remove estilos que são específicos para a lista simples e não para o Kanban) */
+/* Removido: .task-item, .task-item input[type="checkbox"], .task-item label, .task-item.completed, .due-date, .high-priority, .medium-priority, .low-priority */
+/* Se precisar de ícone de exclusão, adicione no HTML/JS do Kanban e use as classes a seguir: */
+
+.btn-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    opacity: 0.5;
+    transition: opacity 0.2s, color 0.2s;
+    padding: 5px;
+}
+
+.btn-delete:hover {
+    opacity: 1;
+    color: #cc0000; 
+}
+
+
+/* --- Responsividade do Dashboard --- */
+@media (max-width: 992px) {
+    .dashboard-container {
+        grid-template-columns: 1fr; 
+    }
+
+    .sidebar {
+        padding: 20px;
+        position: relative;
+    }
+
+    .nav-menu {
+        flex-direction: row; 
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    
+    .nav-item {
+        padding: 10px 15px;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+    }
+
+    .nav-item.active {
+        border-bottom-color: var(--secondary-color);
+        border-left: none;
+    }
+    
+    .sidebar hr, .nav-item.logout {
+        display: none;
+    }
+    
+    .main-content {
+        padding: 20px;
+    }
+    
+    .main-header-dash {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    /* Kanban em telas pequenas - força a rolagem lateral */
+    .kanban-board {
+        flex-wrap: nowrap;
+    }
+
+    .kanban-column {
+        min-width: 280px;
+    }
+
+    /* Ajustes na Estrutura da Tarefa para telas menores (se for necessário manter a lógica de exclusão no card) */
+    .card-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .task-actions {
+        /* Se você adicionar ações (como o botão de lixeira) dentro do kanban-card */
+        display: none; /* Esconde ou simplifica ações em telas muito pequenas */
+    }
+}
