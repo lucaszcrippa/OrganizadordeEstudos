@@ -49,7 +49,7 @@ JavaScript
 
 Clone o repositório:
 
-git clone https://github.com/seuuser/EstudoPro.git
+git clone https://github.com/lucaszcrippa/OrganizadordeEstudos
 
 Abra o arquivo index.html no navegador.
 
